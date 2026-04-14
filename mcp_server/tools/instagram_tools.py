@@ -1,5 +1,5 @@
 from fastmcp.tools import tool
-from app.utils.instagram_client import InstagramClient
+from mcp_server.utils.instagram_client import InstagramClient
 import time
 import random
 from typing import Any, Dict

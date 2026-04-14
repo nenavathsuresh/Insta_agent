@@ -1,4 +1,4 @@
-from app.tools.instagram_tools import (
+from mcp_server.tools.instagram_tools import (
     get_instagram_profile,
     get_instagram_media_list,
     get_instagram_media_details,

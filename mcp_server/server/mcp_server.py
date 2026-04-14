@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from app.server.routes import register_tools
+from mcp_server.server.routes import register_tools
 
 
 class MCPServer:
