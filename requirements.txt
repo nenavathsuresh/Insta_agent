@@ -1,0 +1,33 @@
+fastmcp
+python-dotenv
+requests
+pydantic
+loguru
+# Core Agent Framework
+agent-framework
+agent-framework-foundry
+agent-framework-openai
+
+# MCP support
+# agent-framework-mcp>=1.0.0   # uncomment when using local/SSE MCP tools
+
+# Azure identity & monitor
+azure-identity
+azure-monitor-opentelemetry
+# OpenTelemetry core
+opentelemetry-sdk
+opentelemetry-api
+opentelemetry-exporter-otlp-proto-grpc
+
+# FastAPI server
+fastapi
+uvicorn[standard]
+
+# Session storage
+redis[asyncio] 
+
+# Utilities
+python-dotenv
+pydantic
+python-json-logger
+
