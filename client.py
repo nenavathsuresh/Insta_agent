@@ -15,6 +15,8 @@ SERVER_SCRIPT = ROOT / "main.py"
 
 
 ACTION_TO_TOOL = {
+    "web-search": ("web_search", ["query"]),
+    "web_search": ("web_search", ["query"]),
     "profile": ("get_instagram_profile", []),
     "media-list": ("get_instagram_media_list", []),
     "media-details": ("get_instagram_media_details", ["media_id"]),
@@ -84,6 +86,10 @@ def build_tool_call(args: argparse.Namespace) -> tuple[str, dict[str, Any]] | No
 
     tool_name, required_args = ACTION_TO_TOOL[args.action]
     payload = {name: _get_arg_value(args, name) for name in required_args}
+    if args.action in {"web-search", "web_search"}:
+        payload["max_results"] = args.max_results
+        if args.freshness:
+            payload["freshness"] = args.freshness
     return tool_name, payload
 
 
@@ -129,6 +135,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--media-id")
     parser.add_argument("--comment-id")
     parser.add_argument("--message")
+    parser.add_argument("--query")
+    parser.add_argument("--max-results", dest="max_results", type=int, default=5)
+    parser.add_argument("--freshness")
     parser.add_argument("--image-url", dest="image_url")
     parser.add_argument("--caption")
     parser.add_argument("--creation-id")

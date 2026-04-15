@@ -44,9 +44,11 @@ from mcp_server.tools.instagram_tools import (
     send_instagram_image_message,
     send_instagram_message,
 )
+from mcp_server.tools.web_tools import web_search
 
 
 ALL_TOOLS = (
+    web_search,
     get_instagram_profile,
     get_instagram_media_list,
     get_instagram_media_details,
