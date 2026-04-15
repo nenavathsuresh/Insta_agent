@@ -1,4 +1,52 @@
 from app.tools.instagram_tools import (
+    check_instagram_container_status,
+    create_instagram_carousel_container,
+    create_instagram_carousel_item,
+    create_instagram_live,
+    create_instagram_media_container,
+    create_instagram_product_tagged_post,
+    create_instagram_story_container,
+    create_instagram_video_container,
+    delete_instagram_comment,
+    discover_instagram_business_account,
+    discover_instagram_business_media,
+    end_instagram_live,
+    get_instagram_account_insights,
+    get_instagram_comments,
+    get_instagram_conversation_messages,
+    get_instagram_conversations,
+    get_instagram_follower_demographics,
+    get_instagram_hashtag_recent_media,
+    get_instagram_hashtag_top_media,
+    get_instagram_live,
+    get_instagram_media_details,
+    get_instagram_media_insights,
+    get_instagram_media_list,
+    get_instagram_mention_media,
+    get_instagram_mentions,
+    get_instagram_online_followers,
+    get_instagram_product_catalog,
+    get_instagram_profile,
+    get_instagram_recently_searched_hashtags,
+    get_instagram_saved_media,
+    get_instagram_stories,
+    get_instagram_tagged_media,
+    hide_instagram_comment,
+    post_instagram_comment,
+    publish_instagram_carousel,
+    publish_instagram_media,
+    publish_instagram_post,
+    publish_instagram_reel,
+    publish_instagram_story,
+    reply_to_instagram_comment,
+    search_instagram_hashtag,
+    search_instagram_hashtag_media,
+    send_instagram_image_message,
+    send_instagram_message,
+)
+
+
+ALL_TOOLS = (
     get_instagram_profile,
     get_instagram_media_list,
     get_instagram_media_details,
@@ -8,18 +56,44 @@ from app.tools.instagram_tools import (
     get_instagram_media_insights,
     create_instagram_media_container,
     publish_instagram_media,
-    publish_instagram_post
+    publish_instagram_post,
+    post_instagram_comment,
+    hide_instagram_comment,
+    delete_instagram_comment,
+    get_instagram_follower_demographics,
+    get_instagram_online_followers,
+    create_instagram_video_container,
+    check_instagram_container_status,
+    publish_instagram_reel,
+    create_instagram_carousel_item,
+    create_instagram_carousel_container,
+    publish_instagram_carousel,
+    create_instagram_story_container,
+    publish_instagram_story,
+    get_instagram_stories,
+    search_instagram_hashtag,
+    get_instagram_hashtag_top_media,
+    get_instagram_hashtag_recent_media,
+    search_instagram_hashtag_media,
+    get_instagram_recently_searched_hashtags,
+    get_instagram_tagged_media,
+    get_instagram_mentions,
+    get_instagram_mention_media,
+    discover_instagram_business_account,
+    discover_instagram_business_media,
+    get_instagram_conversations,
+    get_instagram_conversation_messages,
+    send_instagram_message,
+    send_instagram_image_message,
+    create_instagram_live,
+    get_instagram_live,
+    end_instagram_live,
+    get_instagram_saved_media,
+    get_instagram_product_catalog,
+    create_instagram_product_tagged_post,
 )
 
 
 def register_tools(mcp):
-    mcp.add_tool(get_instagram_profile)
-    mcp.add_tool(get_instagram_media_list)
-    mcp.add_tool(get_instagram_media_details)
-    mcp.add_tool(get_instagram_comments)
-    mcp.add_tool(reply_to_instagram_comment)
-    mcp.add_tool(get_instagram_account_insights)
-    mcp.add_tool(get_instagram_media_insights)
-    mcp.add_tool(create_instagram_media_container)
-    mcp.add_tool(publish_instagram_media)
-    mcp.add_tool(publish_instagram_post)
+    for tool in ALL_TOOLS:
+        mcp.add_tool(tool)

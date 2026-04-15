@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     INSTAGRAM_ACCESS_TOKEN: str
     INSTAGRAM_USER_ID: str
+    INSTAGRAM_PAGE_ID: str | None = None
 
 
 settings = Settings()
