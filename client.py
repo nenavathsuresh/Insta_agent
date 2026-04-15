@@ -7,7 +7,7 @@ from typing import Any
 from fastmcp import Client
 from fastmcp.exceptions import ToolError
 
-from app.server.mcp_server import create_server
+from mcp_server.server.mcp_server import create_server
 
 
 ROOT = Path(__file__).resolve().parent
