@@ -137,7 +137,7 @@ class InstagramClient:
             "GET",
             self.user_id,
             params={
-                "fields": "id,username,followers_count,media_count,account_type,biography,website,profile_picture_url,name"
+                "fields": "id,username,followers_count,media_count,biography,website,profile_picture_url,name"
             },
         )
 
