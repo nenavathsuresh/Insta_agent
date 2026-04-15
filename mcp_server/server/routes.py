@@ -1,4 +1,4 @@
-from app.tools.instagram_tools import (
+from mcp_server.tools.instagram_tools import (
     check_instagram_container_status,
     create_instagram_carousel_container,
     create_instagram_carousel_item,
