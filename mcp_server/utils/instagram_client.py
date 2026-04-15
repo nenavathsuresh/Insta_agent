@@ -1,7 +1,7 @@
 import requests
-from typing import Dict, Any, Optional
-from app.config.settings import settings
-from app.utils.logger import logger
+from typing import Dict, Any
+from mcp_server.config.settings import settings
+from mcp_server.utils.logger import logger
 
 
 class InstagramClient:
