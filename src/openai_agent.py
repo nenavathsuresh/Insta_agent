@@ -223,6 +223,10 @@ class OpenAIMCPAgent:
             logger.info("Using OpenAI API model=%s", self._config.model)
 
         client = OpenAIChatClient(**client_kwargs)
+        web_search_tool = client.get_web_search_tool(
+            user_location={"city": "Seattle", "region": "US"},
+        )
+        code_interpreter_tool = client.get_code_interpreter_tool()
 
         # 5. History provider with rolling-window reducer
         history_provider = InMemoryHistoryProvider(
@@ -234,12 +238,22 @@ class OpenAIMCPAgent:
         self._agent = client.as_agent(
             name="OpenAIMCPAgent",
             instructions=(
-                "You are a helpful, precise assistant. "
-                "Always use the available tools to answer questions. "
+                "Your name is Easha, and you are the user's personal assistant. "
+                "Greet the user warmly as Boss when it feels natural, such as at the start of a new chat "
+                "or when acknowledging a request. "
+                "Use a respectful, proactive, assistant-like tone. "
+                "Answer only from the conversation, tool results, or clearly stated reasoning. "
+                "Use web search for current, time-sensitive, niche, or uncertain facts before answering. "
+                "Use the available MCP tools for Instagram or server-specific tasks, and use code interpreter "
+                "for calculations, data analysis, or file-based reasoning. "
+                "Do not invent facts, citations, links, tool output"
+                "If information is missing or a tool cannot verify it, say what is unknown and ask for the "
+                "needed detail or explain the limitation. "
+                "When using tool results, summarize them accurately and distinguish facts from assumptions. "
                 "Be concise and factual. "
                 "If a tool call fails, explain what happened clearly."
             ),
-            tools=mcp_tool,
+            tools=[mcp_tool, web_search_tool, code_interpreter_tool],
             context_providers=[history_provider],
             compaction_strategy=SlidingWindowStrategy(
                 keep_last_groups=self._config.max_history_messages

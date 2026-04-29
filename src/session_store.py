@@ -27,6 +27,28 @@ from typing import Any
 logger = logging.getLogger("agent.session")
 
 
+def _json_safe(value: Any) -> Any:
+    """Convert SDK/model objects into plain JSON-compatible values."""
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+
+    if isinstance(value, dict):
+        return {str(k): _json_safe(v) for k, v in value.items()}
+
+    if isinstance(value, (list, tuple, set)):
+        return [_json_safe(v) for v in value]
+
+    model_dump = getattr(value, "model_dump", None)
+    if callable(model_dump):
+        return _json_safe(model_dump(mode="json"))
+
+    to_dict = getattr(value, "to_dict", None)
+    if callable(to_dict):
+        return _json_safe(to_dict())
+
+    return str(value)
+
+
 # ---------------------------------------------------------------------------
 # Data model
 # ---------------------------------------------------------------------------
@@ -43,17 +65,20 @@ class SessionData:
 
     def add_message(self, role: str, content: str) -> None:
         self.messages.append({"role": role, "content": content, "ts": time.time()})
+        # Keep only the last 3 messages
+        if len(self.messages) > 3:
+            self.messages = self.messages[-3:]
         self.updated_at = time.time()
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        return _json_safe({
             "session_id": self.session_id,
             "messages": self.messages,
             "metadata": self.metadata,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "service_session_id": self.service_session_id,
-        }
+        })
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "SessionData":
